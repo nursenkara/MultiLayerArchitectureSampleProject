@@ -7,33 +7,19 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class OrderProductsController : ControllerBase
     {
-        private IProductService _productService;
+        private IOrderProductService _orderProductService;
 
-        public ProductsController(IProductService productService)
+        public OrderProductsController(IOrderProductService orderProductService)
         {
-            _productService = productService;
+            _orderProductService = orderProductService;
         }
 
         [HttpGet("getall")]
-        //[Authorize(Roles = "Product.List")]
         public IActionResult GetList()
         {
-
-            var result = _productService.GetList();
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-
-            return BadRequest(result);
-        }
-
-        [HttpGet("getlistbycategory")]
-        public IActionResult GetListByCategory(int categoryId)
-        {
-            var result = _productService.GetListByCategory(categoryId);
+            var result = _orderProductService.GetList();
             if (result.Success)
             {
                 return Ok(result);
@@ -43,9 +29,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int productId)
+        public IActionResult GetById(int orderProductId)
         {
-            var result = _productService.GetById(productId);
+            var result = _orderProductService.GetById(orderProductId);
             if (result.Success)
             {
                 return Ok(result);
@@ -55,9 +41,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Product product)
+        public IActionResult Add(OrderProduct orderProduct)
         {
-            var result = _productService.Add(product);
+            var result = _orderProductService.Add(orderProduct);
             if (result.Success)
             {
                 return Ok(result);
@@ -67,9 +53,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("update")]
-        public IActionResult Update(Product product)
+        public IActionResult Update(OrderProduct orderProduct)
         {
-            var result = _productService.Update(product);
+            var result = _orderProductService.Update(orderProduct);
             if (result.Success)
             {
                 return Ok(result);
@@ -79,9 +65,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("delete")]
-        public IActionResult Delete(Product product)
+        public IActionResult Delete(OrderProduct orderProduct)
         {
-            var result = _productService.Delete(product);
+            var result = _orderProductService.Delete(orderProduct);
             if (result.Success)
             {
                 return Ok(result);
@@ -89,8 +75,6 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
-
-
 
     }
 }

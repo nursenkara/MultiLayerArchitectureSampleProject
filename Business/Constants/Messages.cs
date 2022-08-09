@@ -38,5 +38,10 @@ namespace Business.Constants
         public static string CategoryAdded = "Category is successfully added";
         public static string CategoryDeleted = "Category is successfully deleted";
         public static string CategoryUpdated = "Category is successfully updated";
+
+        public static string OrderProductAdded = "OrderProduct is successfully added";
+        public static string OrderProductDeleted  = "OrderProduct is successfully deleted";
+        public static string OrderProductUpdated = "OrderProduct is successfully updated";
+        public static string ProductListed = "Products are successfully listed!";
     }
 }

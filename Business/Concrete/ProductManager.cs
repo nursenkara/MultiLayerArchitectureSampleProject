@@ -32,7 +32,7 @@ namespace Business.Concrete
 
         public IDataResult<Product> GetById(int productId)
         {
-            return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId));
+            return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId),"Product is successfully listed!");
         }
 
         [PerformanceAspect(5)]
@@ -42,16 +42,16 @@ namespace Business.Concrete
             var list = _productDal.GetList().ToList();
             var models = ProductToProductModel(list);
 
-            return new SuccessDataResult<List<ProductListModel>>(models);
-            
-        }
+            return new SuccessDataResult<List<ProductListModel>>(models,Messages.ProductListed);
+
+        } 
 
         //[SecuredOperation("Product.List,Admin")]
         [LogAspect(typeof(FileLogger))]
         [CacheAspect(duration: 10)]
         public IDataResult<List<Product>> GetListByCategory(int categoryId)
         {
-            return new SuccessDataResult<List<Product>>(_productDal.GetList(p => p.CategoryId == categoryId).ToList());
+            return new SuccessDataResult<List<Product>>(_productDal.GetList(p => p.CategoryId == categoryId).ToList(), "Products are successfully listed group by category!");
         }
 
 
@@ -104,6 +104,7 @@ namespace Business.Concrete
                 var categoryName = _categoryService.GetById(product.CategoryId).Data;
                 models.Add(new ProductListModel
                 {
+                    ProductId = product.ProductId,
                     ProductName = product.ProductName,
                     CategoryName = categoryName.CategoryName,
                     UnitPrice = product.UnitPrice,

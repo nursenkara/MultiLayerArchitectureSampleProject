@@ -22,10 +22,10 @@ namespace WebAPI.Controllers
             var result = _orderService.GetList();
             if (result.Success)
             {
-                return Ok(result.Data);
+                return Ok(result);
             }
 
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpGet("getbyid")]
@@ -46,10 +46,10 @@ namespace WebAPI.Controllers
             var result = _orderService.Add(order);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
 
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpPut("update")]
@@ -58,10 +58,10 @@ namespace WebAPI.Controllers
             var result = _orderService.Update(order);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
 
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpDelete("delete")]
@@ -70,10 +70,10 @@ namespace WebAPI.Controllers
             var result = _orderService.Delete(order);
             if (result.Success)
             {
-                return Ok(result.Message);
+                return Ok(result);
             }
 
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
 

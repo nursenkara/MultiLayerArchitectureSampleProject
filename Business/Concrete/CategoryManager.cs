@@ -34,12 +34,12 @@ namespace Business.Concrete
 
         public IDataResult<Category> GetById(int categoryId)
         {
-            return new SuccessDataResult<Category>(_categoryDal.Get(p => p.CategoryId == categoryId));
+            return new SuccessDataResult<Category>(_categoryDal.Get(p => p.CategoryId == categoryId),"Category is successfully listed!");
         }
 
         public IDataResult<List<Category>> GetList()
         {
-            return new SuccessDataResult<List<Category>>(_categoryDal.GetList().ToList());
+            return new SuccessDataResult<List<Category>>(_categoryDal.GetList().ToList(),"Categories are successfully listed!");
         }
 
         public IResult Update(Category category)

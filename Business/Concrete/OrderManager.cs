@@ -39,16 +39,16 @@ namespace Business.Concrete
         {
             var order = _orderDal.Get(p => p.OrderId == orderId);
             var model = OrderToGetOrderModel(order);
-            return new SuccessDataResult<OrderModel>(model);
+            return new SuccessDataResult<OrderModel>(model,"Order is successfully listed!");
         }
 
         public IDataResult<List<OrderModel>> GetList()
         {
             //Thread.Sleep(5000);
             var list = _orderDal.GetList().ToList();
-            var models = OrderToOrderModel(list);
+            var models = OrderToOrderListModel(list);
 
-            return new SuccessDataResult<List<OrderModel>>(models);
+            return new SuccessDataResult<List<OrderModel>>(models,"Orders are successfully listed!");
 
         }
 
@@ -58,7 +58,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.OrderUpdated);
         }
 
-        private List<OrderModel> OrderToOrderModel(List<Order> orders)
+        private List<OrderModel> OrderToOrderListModel(List<Order> orders)
         {
 
             var models = new List<OrderModel>();
@@ -88,9 +88,9 @@ namespace Business.Concrete
 
            
                
-            }
+        }
 
        
     }
-    }
+}
 
