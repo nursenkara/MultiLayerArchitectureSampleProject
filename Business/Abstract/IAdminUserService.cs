@@ -8,6 +8,7 @@ namespace Business.Abstract
         List<OperationClaim> GetClaims(Admin admin);
         void Add(Admin admin);
         Admin GetByUserName(string userName);
+        IDataResult<Admin> GetById(int userId);
         int GetAdminUserId();
         IDataResult<List<Admin>> GetList();
     }

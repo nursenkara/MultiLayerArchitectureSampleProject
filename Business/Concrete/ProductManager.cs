@@ -10,6 +10,7 @@ using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.Dtos.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,10 +36,14 @@ namespace Business.Concrete
         }
 
         [PerformanceAspect(5)]
-        public IDataResult<List<Product>> GetList()
+        public IDataResult<List<ProductListModel>> GetList()
         {
-            Thread.Sleep(5000);
-            return new SuccessDataResult<List<Product>>(_productDal.GetList().ToList());
+            //Thread.Sleep(5000);
+            var list = _productDal.GetList().ToList();
+            var models = ProductToProductModel(list);
+
+            return new SuccessDataResult<List<ProductListModel>>(models);
+            
         }
 
         //[SecuredOperation("Product.List,Admin")]
@@ -90,6 +95,24 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ProductUpdated);
         }
 
+        private List<ProductListModel> ProductToProductModel(List<Product> products)
+        {
+
+            var models = new List<ProductListModel>();
+            foreach (var product in products)
+            {
+                var categoryName = _categoryService.GetById(product.CategoryId).Data;
+                models.Add(new ProductListModel
+                {
+                    ProductName = product.ProductName,
+                    CategoryName = categoryName.CategoryName,
+                    UnitPrice = product.UnitPrice,
+                    UnitsInStock = product.UnitsInStock
+                });
+            }
+
+            return models;
+        }
        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entities.Concrete;
+using Entities.Dtos.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Business.Abstract
     public interface IProductService
     {
         IDataResult<Product> GetById(int productId);
-        IDataResult<List<Product>> GetList();
+        IDataResult<List<ProductListModel>> GetList();
         IDataResult<List<Product>> GetListByCategory(int categoryId);
         IResult Add(Product product);
         IResult Delete(Product product);

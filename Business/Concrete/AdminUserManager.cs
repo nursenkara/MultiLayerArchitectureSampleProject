@@ -41,5 +41,10 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Admin>>(_adminDal.GetList().ToList());
         }
+
+        public IDataResult<Admin> GetById(int userId)
+        {
+            return new SuccessDataResult<Admin>(_adminDal.Get(p => p.Id == userId));
+        }
     }
 }
