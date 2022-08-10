@@ -34,12 +34,12 @@ namespace Business.Concrete
 
         public IDataResult<OrderProduct> GetById(int orderProductId)
         {
-            return new SuccessDataResult<OrderProduct>(_orderProductDal.Get(p => p.OrderProductId == orderProductId), "OrderModel is successfully listed!");
+            return new SuccessDataResult<OrderProduct>(_orderProductDal.Get(p => p.OrderProductId == orderProductId), Messages.OrderProductListed);
         }
 
         public IDataResult<List<OrderProduct>> GetList()
         {
-            return new SuccessDataResult<List<OrderProduct>>(_orderProductDal.GetList().ToList(),"OrderModels are successfully listed!");
+            return new SuccessDataResult<List<OrderProduct>>(_orderProductDal.GetList().ToList(),Messages.OrderProductsListed);
         }
 
         public IResult Update(OrderProduct orderProduct)

@@ -32,7 +32,7 @@ namespace Business.Concrete
 
         public IDataResult<Product> GetById(int productId)
         {
-            return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId),"Product is successfully listed!");
+            return new SuccessDataResult<Product>(_productDal.Get(p => p.ProductId == productId),Messages.ProductListed);
         }
 
         [PerformanceAspect(5)]
@@ -40,9 +40,9 @@ namespace Business.Concrete
         {
             //Thread.Sleep(5000);
             var list = _productDal.GetList().ToList();
-            var models = ProductToProductModel(list);
+            var models = ProductToProductListModel(list);
 
-            return new SuccessDataResult<List<ProductListModel>>(models,Messages.ProductListed);
+            return new SuccessDataResult<List<ProductListModel>>(models,Messages.ProductsListed);
 
         } 
 
@@ -51,7 +51,7 @@ namespace Business.Concrete
         [CacheAspect(duration: 10)]
         public IDataResult<List<Product>> GetListByCategory(int categoryId)
         {
-            return new SuccessDataResult<List<Product>>(_productDal.GetList(p => p.CategoryId == categoryId).ToList(), "Products are successfully listed group by category!");
+            return new SuccessDataResult<List<Product>>(_productDal.GetList(p => p.CategoryId == categoryId).ToList(), Messages.ProductsListedByCategory);
         }
 
 
@@ -87,7 +87,7 @@ namespace Business.Concrete
             _productDal.Delete(product);
             return new SuccessResult(Messages.ProductDeleted);
         }
-
+        [ValidationAspect(typeof(ProductValidator), Priority = 1)]
         public IResult Update(Product product)
         {
 
@@ -95,7 +95,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ProductUpdated);
         }
 
-        private List<ProductListModel> ProductToProductModel(List<Product> products)
+        private List<ProductListModel> ProductToProductListModel(List<Product> products)
         {
 
             var models = new List<ProductListModel>();

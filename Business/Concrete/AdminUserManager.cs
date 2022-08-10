@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using Entities.Abstract;
 using Entities.Concrete;
@@ -39,12 +40,12 @@ namespace Business.Concrete
 
         public IDataResult<List<Admin>> GetList()
         {
-            return new SuccessDataResult<List<Admin>>(_adminDal.GetList().ToList());
+            return new SuccessDataResult<List<Admin>>(_adminDal.GetList().ToList(),Messages.AdminsListed);
         }
 
         public IDataResult<Admin> GetById(int userId)
         {
-            return new SuccessDataResult<Admin>(_adminDal.Get(p => p.Id == userId));
+            return new SuccessDataResult<Admin>(_adminDal.Get(p => p.Id == userId),Messages.AdminListed);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.AutoFac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Abstract;
@@ -23,6 +25,7 @@ namespace Business.Concrete
             _adminUserService = adminUserService;
             
         }
+        [ValidationAspect(typeof(OrderValidator), Priority = 1)]
         public IResult Add(Order order)
         {
             _orderDal.Add(order);
@@ -39,7 +42,7 @@ namespace Business.Concrete
         {
             var order = _orderDal.Get(p => p.OrderId == orderId);
             var model = OrderToGetOrderModel(order);
-            return new SuccessDataResult<OrderModel>(model,"Order is successfully listed!");
+            return new SuccessDataResult<OrderModel>(model,Messages.OrderListed);
         }
 
         public IDataResult<List<OrderModel>> GetList()
@@ -48,10 +51,10 @@ namespace Business.Concrete
             var list = _orderDal.GetList().ToList();
             var models = OrderToOrderListModel(list);
 
-            return new SuccessDataResult<List<OrderModel>>(models,"Orders are successfully listed!");
+            return new SuccessDataResult<List<OrderModel>>(models,Messages.OrdersListed);
 
         }
-
+        [ValidationAspect(typeof(OrderValidator), Priority = 1)]
         public IResult Update(Order order)
         {
             _orderDal.Update(order);
