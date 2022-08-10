@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
             _productService = productService;
         }
 
-        [HttpGet("getall")]
+        [HttpGet("GetAll")]
         //[Authorize(Roles = "Product.List")]
         public IActionResult GetList()
         {
@@ -30,7 +30,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getlistbycategory")]
+        [HttpGet("GetListByCategory")]
         public IActionResult GetListByCategory(int categoryId)
         {
             var result = _productService.GetListByCategory(categoryId);
@@ -42,7 +42,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyid")]
+        [HttpGet("GetById")]
         public IActionResult GetById(int productId)
         {
             var result = _productService.GetById(productId);
@@ -54,8 +54,8 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(Product product)
+        [HttpPost("CreateProduct")]
+        public IActionResult CreateProduct(Product product)
         {
             var result = _productService.Add(product);
             if (result.Success)
@@ -66,8 +66,8 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPut("update")]
-        public IActionResult Update(Product product)
+        [HttpPut("UpdateProduct")]
+        public IActionResult UpdateProduct(Product product)
         {
             var result = _productService.Update(product);
             if (result.Success)
@@ -78,10 +78,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpDelete("delete")]
-        public IActionResult Delete(Product product)
+        [HttpDelete("RemoveProduct/{productId}")]
+        public IActionResult RemoveProduct(int productId)
         {
-            var result = _productService.Delete(product);
+            var result = _productService.Delete(productId);
             if (result.Success)
             {
                 return Ok(result);

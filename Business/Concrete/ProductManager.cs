@@ -82,10 +82,16 @@ namespace Business.Concrete
         }
 
 
-        public IResult Delete(Product product)
+        public IResult Delete(int productId)
         {
-            _productDal.Delete(product);
-            return new SuccessResult(Messages.ProductDeleted);
+            var product = _productDal.Get(p => p.ProductId == productId);
+            if (product != null)
+            {
+                _productDal.Delete(product);
+                return new SuccessResult(Messages.ProductDeleted);
+            }
+            return new ErrorResult(Messages.ProductNotFound);
+           
         }
         [ValidationAspect(typeof(ProductValidator), Priority = 1)]
         public IResult Update(Product product)

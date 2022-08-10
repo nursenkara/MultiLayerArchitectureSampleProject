@@ -38,6 +38,8 @@ namespace Business.Constants
         public static string ProductListed = "Product is successfully listed";
         public static string ProductNameAlreadyExists = "Product name is already exists";
         public static string ProductsListedByCategory = "Products are successfully listed by category!";
+        public static string ProductNotFound = "Product is not found";
+
         #endregion
 
         #region Order
@@ -46,6 +48,7 @@ namespace Business.Constants
         public static string OrderUpdated = "Order is successfully updated";
         public static string OrderListed = "Order is successfully listed!";
         public static string OrdersListed = "Orders are successfully listed!";
+        public static string OrderNotFound = "Order is not found";
         #endregion
 
         #region Category
@@ -55,6 +58,7 @@ namespace Business.Constants
         public static string CategoryListed = "Category is successfully listed";
         public static string CategoriesListed = "Categories are successfully listed";
         public static string CategoryNotFound = "Category is not found";
+        public static string CategoryAlreadyExists = "Category name is already exists";
         #endregion
 
         #region OrderProduct
@@ -63,6 +67,7 @@ namespace Business.Constants
         public static string OrderProductUpdated = "OrderProduct is successfully updated";
         public static string OrderProductListed = "OrderModel is successfully listed";
         public static string OrderProductsListed = "OrderModels are successfully listed";
+        public static string OrderProductNotFound = "Order Product is not found";
         #endregion
 
         #region Brand
@@ -74,7 +79,8 @@ namespace Business.Constants
         public static string BrandNotFound = "Brand is not found";
         public static string BrandAlreadyExists = "Brand is already exists";
 
-        public static string CategoryAlreadyExists { get; internal set; }
+       
+
         #endregion
 
 

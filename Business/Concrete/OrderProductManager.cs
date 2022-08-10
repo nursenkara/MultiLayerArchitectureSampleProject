@@ -26,10 +26,16 @@ namespace Business.Concrete
             return new SuccessResult(Messages.OrderProductAdded);
         }
 
-        public IResult Delete(OrderProduct orderProduct)
+        public IResult Delete(int orderProductId)
         {
-            _orderProductDal.Delete(orderProduct);
-            return new SuccessResult(Messages.OrderProductDeleted);
+            var orderProduct = _orderProductDal.Get(b => b.OrderProductId == orderProductId);
+            if (orderProduct != null)
+            {
+                _orderProductDal.Delete(orderProduct);
+                return new SuccessResult(Messages.OrderProductDeleted);
+            }
+            return new ErrorResult(Messages.OrderProductNotFound);
+
         }
 
         public IDataResult<OrderProduct> GetById(int orderProductId)

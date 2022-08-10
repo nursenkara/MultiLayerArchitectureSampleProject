@@ -15,7 +15,7 @@ namespace Business.Abstract
         IDataResult<List<OrderModel>> GetList();
         //IDataResult<List<Order>> GetListByUser(int userId);
         IResult Add(Order order);
-        IResult Delete(Order order);
+        IResult Delete(int orderId);
         IResult Update(Order order);
     }
 }

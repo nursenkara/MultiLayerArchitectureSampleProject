@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
             _orderProductService = orderProductService;
         }
 
-        [HttpGet("getall")]
+        [HttpGet("GetAll")]
         public IActionResult GetList()
         {
             var result = _orderProductService.GetList();
@@ -28,7 +28,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyid")]
+        [HttpGet("GetById")]
         public IActionResult GetById(int orderProductId)
         {
             var result = _orderProductService.GetById(orderProductId);
@@ -40,8 +40,8 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(OrderProduct orderProduct)
+        [HttpPost("CreateOrderProduct")]
+        public IActionResult CreateOrderProduct(OrderProduct orderProduct)
         {
             var result = _orderProductService.Add(orderProduct);
             if (result.Success)
@@ -52,8 +52,8 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPut("update")]
-        public IActionResult Update(OrderProduct orderProduct)
+        [HttpPut("UpdateOrderProduct")]
+        public IActionResult UpdateOrderProduct(OrderProduct orderProduct)
         {
             var result = _orderProductService.Update(orderProduct);
             if (result.Success)
@@ -64,10 +64,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpDelete("delete")]
-        public IActionResult Delete(OrderProduct orderProduct)
+        [HttpDelete("RemoveOrderProduct/{orderProductId}")]
+        public IActionResult RemoveOrderProduct(int orderProductId)
         {
-            var result = _orderProductService.Delete(orderProduct);
+            var result = _orderProductService.Delete(orderProductId);
             if (result.Success)
             {
                 return Ok(result);

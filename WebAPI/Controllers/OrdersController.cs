@@ -64,10 +64,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpDelete("RemoveOrder")]
-        public IActionResult RemoveOrder(Order order)
+        [HttpDelete("RemoveOrder/{orderProductId}")]
+        public IActionResult RemoveOrder(int orderProductId)
         {
-            var result = _orderService.Delete(order);
+            var result = _orderService.Delete(orderProductId);
             if (result.Success)
             {
                 return Ok(result);

@@ -32,10 +32,16 @@ namespace Business.Concrete
             return new SuccessResult(Messages.OrderAdded);
         }
 
-        public IResult Delete(Order order)
+        public IResult Delete(int orderId)
         {
-            _orderDal.Delete(order);
-            return new SuccessResult(Messages.OrderDeleted);
+            var order = _orderDal.Get(o => o.OrderId == orderId);
+            if (order != null)
+            {
+                _orderDal.Delete(order);
+                return new SuccessResult(Messages.OrderDeleted);
+            }
+            return new ErrorResult(Messages.OrderNotFound);
+           
         }
 
         public IDataResult<OrderModel> GetById(int orderId)

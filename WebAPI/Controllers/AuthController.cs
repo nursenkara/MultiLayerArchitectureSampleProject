@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
             _authService = authService;
         }
 
-        [HttpPost("login")]
+        [HttpPost("Login")]
         public IActionResult Login(AdminForLoginDto userForLoginDto)
         {
             var userToLogin = _authService.Login(userForLoginDto);
@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public IActionResult Register(AdminForRegisterDto adminForRegisterDto)
         {
             var userToRegister = _authService.Register(adminForRegisterDto);
