@@ -16,7 +16,7 @@ namespace WebAPI.Controllers
             _orderService = orderService;
         }
 
-        [HttpGet("getall")]
+        [HttpGet("GetAll")]
         public IActionResult GetList()
         {
             var result = _orderService.GetList();
@@ -28,7 +28,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyid")]
+        [HttpGet("GetById")]
         public IActionResult GetById(int orderId)
         {
             var result = _orderService.GetById(orderId);
@@ -40,8 +40,8 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(Order order)
+        [HttpPost("CreateOrder")]
+        public IActionResult CreateOrder(Order order)
         {
             var result = _orderService.Add(order);
             if (result.Success)
@@ -52,8 +52,8 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPut("update")]
-        public IActionResult Update(Order order)
+        [HttpPut("UpdateOrder")]
+        public IActionResult UpdateOrder(Order order)
         {
             var result = _orderService.Update(order);
             if (result.Success)
@@ -64,8 +64,8 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpDelete("delete")]
-        public IActionResult Delete(Order order)
+        [HttpDelete("RemoveOrder")]
+        public IActionResult RemoveOrder(Order order)
         {
             var result = _orderService.Delete(order);
             if (result.Success)

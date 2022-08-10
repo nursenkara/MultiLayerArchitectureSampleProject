@@ -2,9 +2,11 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.AutoFac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.Dtos.Brands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,10 +31,15 @@ namespace Business.Concrete
             return new SuccessResult(Messages.BrandAdded);
         }
 
-        public IResult Delete(Brand brand)
+        public IResult Delete(int brandId)
         {
-            _brandDal.Delete(brand);
-            return new SuccessResult(Messages.BrandDeleted);
+            var brand = _brandDal.Get(b => b.BrandId == brandId);
+            if (brand != null)
+            {
+                _brandDal.Delete(brand);
+                return new SuccessResult(Messages.BrandDeleted);
+            }
+            return new ErrorResult(Messages.BrandNotFound);
         }
 
         public IDataResult<Brand> GetById(int brandId)
@@ -48,8 +55,23 @@ namespace Business.Concrete
         [ValidationAspect(typeof(BrandValidator), Priority = 1)]
         public IResult Update(Brand brand)
         {
-            _brandDal.Update(brand);
-            return new SuccessResult(Messages.BrandUpdated);
+             _brandDal.Update(brand);
+             return new SuccessResult(Messages.BrandUpdated);
+
+
         }
+
+
+        #region BrandNameControl
+        private IResult CheckIfBrandNameExists(string brandName)
+        {
+            var bank = _brandDal.Get(b => b.BrandName == brandName);
+            if (bank == null)
+            {
+                return new SuccessResult();
+            }
+            return new ErrorResult(Messages.BrandAlreadyExists);
+        }
+        #endregion
     }
 }

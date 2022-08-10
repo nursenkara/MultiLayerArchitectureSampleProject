@@ -2,9 +2,11 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.AutoFac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.Dtos.Categories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,10 +30,15 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CategoryAdded);
         }
 
-        public IResult Delete(Category category)
+        public IResult Delete(int categoryId)
         {
-            _categoryDal.Delete(category);
-            return new SuccessResult(Messages.CategoryDeleted);
+            var category = _categoryDal.Get(c => c.CategoryId == categoryId);
+            if (category != null)
+            {
+                _categoryDal.Delete(category);
+                return new SuccessResult(Messages.CategoryDeleted);
+            }
+            return new ErrorResult(Messages.CategoryNotFound);
         }
 
         public IDataResult<Category> GetById(int categoryId)
@@ -50,5 +57,18 @@ namespace Business.Concrete
             _categoryDal.Update(category);
             return new SuccessResult(Messages.CategoryUpdated);
         }
+
+
+        #region CategoryNameControl
+        private IResult CheckIfCategoryNameExists(string categoryName)
+        {
+            var category = _categoryDal.Get(b => b.CategoryName == categoryName);
+            if (category == null)
+            {
+                return new SuccessResult();
+            }
+            return new ErrorResult(Messages.CategoryAlreadyExists);
+        }
+        #endregion
     }
 }

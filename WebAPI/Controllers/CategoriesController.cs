@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
             _categoryService = categoryService;
         }
 
-        [HttpGet("getall")]
+        [HttpGet("GetAll")]
         public IActionResult GetList()
         {
             var result = _categoryService.GetList();
@@ -30,7 +30,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyid")]
+        [HttpGet("GetById")]
         public IActionResult GetById(int categoryId)
         {
             var result = _categoryService.GetById(categoryId);
@@ -42,8 +42,8 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(Category category)
+        [HttpPost("CreateCategory")]
+        public IActionResult CreateCategory(Category category)
         {
             var result = _categoryService.Add(category);
             if (result.Success)
@@ -54,8 +54,8 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPut("update")]
-        public IActionResult Update(Category category)
+        [HttpPut("UpdateCategory")]
+        public IActionResult UpdateCategory(Category category)
         {
             var result = _categoryService.Update(category);
             if (result.Success)
@@ -66,10 +66,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpDelete("delete")]
-        public IActionResult Delete(Category category)
+        [HttpDelete("RemoveCategory/{categoryId}")]
+        public IActionResult RemoveCategory(int categoryId)
         {
-            var result = _categoryService.Delete(category);
+            var result = _categoryService.Delete(categoryId);
             if (result.Success)
             {
                 return Ok(result);

@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.Dtos.Brands;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +18,7 @@ namespace WebAPI.Controllers
         }
 
         
-        [HttpGet("getall")]
+        [HttpGet("GetAll")]
         public IActionResult GetList()
         {
             var result = _brandService.GetList();
@@ -30,7 +31,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyid")]
+        [HttpGet("GetById")]
         public IActionResult GetById(int brandId)
         {
             var result = _brandService.GetById(brandId);
@@ -42,8 +43,8 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(Brand brand)
+        [HttpPost("CreateBrand")]
+        public IActionResult CreateBrand(Brand brand)
         {
             var result = _brandService.Add(brand);
             if (result.Success)
@@ -54,8 +55,8 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPut("update")]
-        public IActionResult Update(Brand brand)
+        [HttpPut("UpdateBrand")]
+        public IActionResult UpdateBrand(Brand brand)
         {
             var result = _brandService.Update(brand);
             if (result.Success)
@@ -65,10 +66,10 @@ namespace WebAPI.Controllers
 
             return BadRequest(result);
         }
-        [HttpDelete("delete")]
-        public IActionResult Delete(Brand brand)
+        [HttpDelete("RemoveBrand/{brandId}")]
+        public IActionResult RemoveBrand(int brandId)
         {
-            var result = _brandService.Delete(brand);
+            var result = _brandService.Delete(brandId);
             if (result.Success)
             {
                 return Ok(result);
