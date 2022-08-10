@@ -50,8 +50,8 @@ namespace Business.Constants
         public static string OrderProductUpdated = "OrderProduct is successfully updated";
         
 
-        public static string OrderProductListed = "OrderModel is successfully listed!";
-        public static string OrderProductsListed = "OrderModels are successfully listed!";
+        public static string OrderProductListed = "OrderModel is successfully listed";
+        public static string OrderProductsListed = "OrderModels are successfully listed";
 
         public static string OrderListed = "Order is successfully listed!";
         public static string OrdersListed = "Orders are successfully listed!";
@@ -63,5 +63,14 @@ namespace Business.Constants
         public static string BrandListed = "Brand is successfully listed";
         public static string BrandsListed = "Brands are successfully listed";
         public static string BrandUpdated = "Brand is successfully updated";
+
+        public static string ActiveAdminNotFound = "Active admin is not found";
+
+        public static string InActiveAdminNotFound = "Inactive admin is not found";
+
+        public static string AdminDeleted = "Admin is successfully deleted";
+
+        public static string ActiveAdminsListed = "Active admins are successfully listed";
+        public static string InactiveAdminsListed = "Inactive admins are successfully listed";
     }
 }

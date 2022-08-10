@@ -9,7 +9,6 @@ namespace Business.ValidationRules.FluentValidation
         {
             RuleFor(a => a.UserName).NotEmpty();
             RuleFor(a => a.Password).NotEmpty();
-            RuleFor(a => a.Status).NotEmpty();
         }
     }
 }

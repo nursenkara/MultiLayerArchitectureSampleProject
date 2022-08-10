@@ -11,5 +11,9 @@ namespace Business.Abstract
         IDataResult<Admin> GetById(int userId);
         int GetAdminUserId();
         IDataResult<List<Admin>> GetList();
+        IDataResult<List<Admin>> GetActiveList();
+        IDataResult<List<Admin>> GetInActiveList();
+        IResult Delete(int adminUserId);
+
     }
 }

@@ -47,5 +47,42 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Admin>(_adminDal.Get(p => p.Id == userId),Messages.AdminListed);
         }
+
+        #region GetActiveList
+        public IDataResult<List<Admin>> GetActiveList()
+        {
+            var activeAdmins = _adminDal.GetList(x => x.Status == true).ToList();
+            if(activeAdmins.Count > 0)
+            {
+                return new SuccessDataResult<List<Admin>>(activeAdmins,Messages.ActiveAdminsListed);
+            }
+            return new ErrorDataResult<List<Admin>>(Messages.ActiveAdminNotFound);
+        }
+        #endregion
+
+        #region GetInActiveList
+        public IDataResult<List<Admin>> GetInActiveList()
+        {
+            var inActiveAdmins = _adminDal.GetList(x => x.Status == false).ToList();
+            if (inActiveAdmins.Count > 0)
+            {
+                return new SuccessDataResult<List<Admin>>(inActiveAdmins,Messages.InactiveAdminsListed);
+            }
+            return new ErrorDataResult<List<Admin>>(Messages.InActiveAdminNotFound);
+        }
+
+        public IResult Delete(int adminUserId)
+        {
+            //_adminDal.Delete(admin);
+            //return new SuccessResult(Messages.AdminDeleted);
+            var admin = _adminDal.Get(a => a.Id == adminUserId);
+            if(admin != null)
+            {
+                _adminDal.Delete(admin);
+                return new SuccessResult(Messages.AdminDeleted);
+            }
+            return new ErrorResult(Messages.AdminNotFound);
+        }
+        #endregion
     }
 }
