@@ -28,6 +28,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<OrderProduct> OrderProducts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
 
 

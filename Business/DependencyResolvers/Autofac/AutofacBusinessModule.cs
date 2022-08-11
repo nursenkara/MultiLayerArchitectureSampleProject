@@ -37,8 +37,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<BrandManager>().As<IBrandService>();
             builder.RegisterType<EfBrandDal>().As<IBrandDal>();
 
-
-
+            builder.RegisterType<CustomerManager>().As<ICustomerService>();
+            builder.RegisterType<EfCustomerDal>().As<ICustomerDal>();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

@@ -1,4 +1,5 @@
 ﻿using Entities.Concrete;
+using Entities.Dtos.Customers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,11 +80,22 @@ namespace Business.Constants
         public static string BrandNotFound = "Brand is not found";
         public static string BrandAlreadyExists = "Brand is already exists";
 
-       
+
 
         #endregion
 
+        #region Customer
+        public static string CustomerEmailExists = "Customer email is already exists";
+        public static string CustomerTCKNExists = "Customer TCKN is already exists";
+        public static string CustomerNotFound = "Customer is not found!";
+        public static string CustomerDeleted = "Customer is successfully deleted!";
+        public static string CustomerUpdated = "Customer is successfully updated!";
 
+        public static string ActiveCustomerNotFound = "Active customer is not found!";
+        public static string InActiveCustomerNotFound = "Inactive customer is not found!";
+
+        public static string CustomerAdded { get; internal set; }
+        #endregion
 
 
     }
